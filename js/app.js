@@ -12,15 +12,15 @@ const showProducts = (products) => {
     const div = document.createElement("div");
     div.classList.add("product");
     div.innerHTML = `
-    <div class="single-product">
+    <div class="single-product bg-light mx-2 mb-3">
       <div>
     <img class="product-image" src=${product.image}></img>
       </div>
-      <h4>${product.title}</h4>
+      <h5 class="fw-bold">${product.title}</h5>
       <p>Category: ${product.category}</p>
-      <h3>Price: <span class="text-star">$ ${product.price}</span></h3>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-outline-secondary"><i class="fas fa-cart-plus"></i> Add to cart</button>
-      <button id="details-btn" class="btn btn-success">Details</button>
+      <h4>Price: <span class="text-star">$ ${product.price}</span></h4>
+      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-warning text-light"><i class="fas fa-cart-plus"></i> Add to cart</button>
+      <button id="details-btn" class="btn btn-outline-success">Details</button>
       <p class="pt-2 fw-bolder"><span class="text-star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span><span> ${product.rating.rate}</span><span> (${product.rating.count})</span></p></div>
       `;
     document.getElementById("all-products").appendChild(div);
