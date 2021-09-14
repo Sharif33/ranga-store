@@ -8,24 +8,46 @@ const loadProducts = () => {
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
   for (const product of allProducts) {
-    const image = product.images;
+    const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
     div.innerHTML = `
     <div class="single-product bg-light mx-2 mb-3">
       <div>
-    <img class="product-image" src=${product.image}></img>
+    <img class="product-image" src=${image}></img>
       </div>
       <h5 class="fw-bold">${product.title}</h5>
       <p>Category: ${product.category}</p>
       <h4>Price: <span class="text-star">$ ${product.price}</span></h4>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-warning text-light"><i class="fas fa-cart-plus"></i> Add to cart</button>
       <button id="details-btn" class="btn btn-outline-success">Details</button>
-      <p class="pt-2 fw-bolder"><span class="text-star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span><span> ${product.rating.rate}</span><span> (${product.rating.count})</span></p></div>
+      <p class="pt-2 fw-bolder"><span class="" id="${product.id}"></span><span> ${product.rating.rate}</span><span> (${product.rating.count})</span></p></div>
       `;
     document.getElementById("all-products").appendChild(div);
+    dynamicRating(product.id, product.rating.rate)
   }
 };
+// Rating Dynamic
+const dynamicRating = (ratingId, stars) => {
+  let star = Math.round(stars);
+  let i = parseInt(ratingId);
+  if (star === 1) {
+    document.getElementById(i).innerHTML = '<i class="fas fa-star text-star"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i>';
+  }
+  else if (star === 2) {
+    document.getElementById(i).innerHTML = '<i class="fas fa-star text-star"></i><i class="fas fa-star text-star"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i>';
+  }
+  else if (star === 3) {
+    document.getElementById(i).innerHTML = '<i class="fas fa-star text-star"></i><i class="fas fa-star text-star"></i><i class="fas fa-star text-star"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i>';
+  }
+  else if (star === 4) {
+    document.getElementById(i).innerHTML = '<i class="fas fa-star text-star"></i><i class="fas fa-star text-star"></i><i class="fas fa-star text-star"></i><i class="fas fa-star text-star"></i><i class="fas fa-star text-secondary"></i>';
+  }
+  else if (star === 5) {
+    document.getElementById(i).innerHTML = '<i class="fas fa-star text-star"></i><i class="fas fa-star text-star"></i><i class="fas fa-star text-star"></i><i class="fas fa-star text-star"></i><i class="fas fa-star text-star"></i>';
+  }
+};
+
 // My Cart 
 let count = 0;
 const addToCart = (id, price) => {
